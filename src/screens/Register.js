@@ -6,41 +6,49 @@ import {
     TouchableOpacity,
     TextInput
 } from 'react-native'
-import { connect } from 'react-redux'
-import { createUser } from '../store/actions/user'
+
+// import { connect } from 'react-redux'
+// import { createUser } from '../store/actions/user'
 
 class Register extends Component {
+
     state = {
         name: '',
         email: '',
         password: ''
     }
 
-    componentDidUpdate = prevProps => {
-        if (prevProps.isLoading && !this.props.isLoading) {
-            this.setState({
-                name: '',
-                email: '',
-                password: ''
-            })
-            this.props.navigation.navigate('Profile') // Feed
-        }
-    }
+    // componentDidUpdate = prevProps => {
+    //     if (prevProps.isLoading && !this.props.isLoading) {
+    //         this.setState({
+    //             name: '',
+    //             email: '',
+    //             password: ''
+    //         })
+    //         this.props.navigation.navigate('Profile') // Feed
+    //     }
+    // }
 
     render() {
         return (
             <View style={styles.container}>
                 <TextInput placeholder='Nome' style={styles.input}
-                    autoFocus={true} value={this.state.name}
+                    autoFocus={true}
+                    value={this.state.name}
                     onChangeText={name => this.setState({ name })} />
+
                 <TextInput placeholder='Email' style={styles.input}
-                    keyboardType='email-address' value={this.state.email}
+                    keyboardType='email-address'
+                    value={this.state.email}
                     onChangeText={email => this.setState({ email })} />
+
                 <TextInput placeholder='Senha' style={styles.input}
-                    secureTextEntry={true} value={this.state.password}
+                    secureTextEntry={true}
+                    value={this.state.password}
                     onChangeText={password => this.setState({ password })} />
-                <TouchableOpacity 
-                    onPress={() => { this.props.onCreateUser(this.state) }} 
+
+                <TouchableOpacity
+                    onPress={() => {}}
                     style={styles.buttom}>
                     <Text style={styles.buttomText}>Salvar</Text>
                 </TouchableOpacity>
@@ -48,6 +56,8 @@ class Register extends Component {
         )
     }
 }
+
+// this.props.onCreateUser(this.state)
 
 const styles = StyleSheet.create({
     container: {
@@ -75,17 +85,18 @@ const styles = StyleSheet.create({
     }
 })
 
-const mapStateToProps = ({ user }) => {
-    return {
-        isLoading: user.isLoading
-    }
-}
+// const mapStateToProps = ({ user }) => {
+//     return {
+//         isLoading: user.isLoading
+//     }
+// }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onCreateUser: user => dispatch(createUser(user))
-    }
-}
+// const mapDispatchToProps = dispatch => {
+//     return {
+//         onCreateUser: user => dispatch(createUser(user))
+//     }
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Register)
-// export default Register
+// export default connect(mapStateToProps, mapDispatchToProps)(Register)
+
+export default Register

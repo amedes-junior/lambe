@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { login } from '../store/actions/user'
+
+// import { connect } from 'react-redux'
+// import { login } from '../store/actions/user'
+
 import {
     View,
     Text,
@@ -10,44 +12,52 @@ import {
 } from 'react-native'
 
 class Login extends Component {
+
     state = {
-        name: 'Temporario',
+        //name: 'Temporario',
         email: '',
         password: ''
     }
 
-    componentDidUpdate = prevProps => {
-        if (prevProps.isLoading && !this.props.isLoading) {
-            this.props.navigation.navigate('Profile')
-        }
-    }
+    // componentDidUpdate = prevProps => {
+    //     if (prevProps.isLoading && !this.props.isLoading) {
+    //         this.props.navigation.navigate('Profile')
+    //     }
+    // }
 
     login = () => {
-        this.props.onLogin({ ...this.state })
+        //this.props.onLogin({ ...this.state })
+        this.props.navigation.navigate('Profile')
     }
 
     render() {
         return (
             <View style={styles.container}>
+
                 <TextInput placeholder='Email' style={styles.input}
-                    autoFocus={true} keyboardType='email-address'
+                    autoFocus={true}
+                    keyboardType='email-address'
                     value={this.state.email}
                     onChangeText={email => this.setState({ email })} />
+
                 <TextInput placeholder='Senha' style={styles.input}
-                    secureTextEntry={true} value={this.state.password}
+                    secureTextEntry={true}
+                    value={this.state.password}
                     onChangeText={password => this.setState({ password })} />
+
                 <TouchableOpacity onPress={this.login} style={styles.buttom}>
                     <Text style={styles.buttomText}>Login</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => {
-                    this.props.navigation.navigate('Register')
-                }} style={styles.buttom}>
+
+                <TouchableOpacity onPress={() => {this.props.navigation.navigate('Register')}}
+                    style={styles.buttom}>
                     <Text style={styles.buttomText}>Criar nova conta...</Text>
                 </TouchableOpacity>
             </View>
         )
     }
 }
+
 
 const styles = StyleSheet.create({
     container: {
@@ -74,17 +84,18 @@ const styles = StyleSheet.create({
     }
 })
 
-const mapStateToProps = ({ user }) => {
-    return {
-        isLoading: user.isLoading
-    }
-}
+export default Login
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onLogin: user => dispatch(login(user))
-    }
-}
+// const mapStateToProps = ({ user }) => {
+//     return {
+//         isLoading: user.isLoading
+//     }
+// }
 
-// export default Login
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+// const mapDispatchToProps = dispatch => {
+//     return {
+//         onLogin: user => dispatch(login(user))
+//     }
+// }
+
+// export default connect(mapStateToProps, mapDispatchToProps)(Login)

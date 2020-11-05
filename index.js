@@ -4,7 +4,14 @@ import {name as appName} from './app.json';
 
 
 // import { Provider } from 'react-redux'
-import App from './src/App'
+// import App from './src/App'
+
+// import Feed from './src/screens/Feed'
+
+import Navigator from './src/Navigator'
+
+
+
 // import {name as appName} from './app.json'
 
 // import storeConfig from './src/store/storeConfig'
@@ -19,5 +26,7 @@ import App from './src/App'
 //     </Provider>
 // )
 
-AppRegistry.registerComponent(appName, () => App)
+// AppRegistry.registerComponent(appName, () => App)
+
+AppRegistry.registerComponent(appName, () => Navigator)
 

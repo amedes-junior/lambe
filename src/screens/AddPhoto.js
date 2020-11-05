@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { addPost } from '../store/actions/posts'
+
+//import { connect } from 'react-redux'
+//import { addPost } from '../store/actions/posts'
+
 import {
     View,
     Text,
@@ -13,37 +15,39 @@ import {
     ScrollView,
     Alert
 } from 'react-native'
+
 import ImagePicker from 'react-native-image-picker'
 
-const noUser = 'Você precisa estar logado para adicionar imagens'
+// const noUser = 'Você precisa estar logado para adicionar imagens'
 
 class AddPhoto extends Component {
+
     state = {
         image: null,
         comment: '',
     }
 
-    componentDidUpdate = prevProps => {
-        if (prevProps.loading && !this.props.loading) {
-            this.setState({
-                image: null,
-                comment: ''
-            })
-            this.props.navigation.navigate('Feed')
-        }
-    }
+    // componentDidUpdate = prevProps => {
+    //     if (prevProps.loading && !this.props.loading) {
+    //         this.setState({
+    //             image: null,
+    //             comment: ''
+    //         })
+    //         this.props.navigation.navigate('Feed')
+    //     }
+    // }
 
     pickImage = () => {
-        if (!this.props.name) {
-            Alert.alert('Falha!', noUser)
-            return
-        }
+        // if (!this.props.name) {
+        //     Alert.alert('Falha!', noUser)
+        //     return
+        // }
 
         ImagePicker.showImagePicker({
             title: 'Escolha a imagem',
             maxHeight: 600,
             maxWidth: 800
-        }, res => {
+        }, (res) => {
             if (!res.didCancel) {
                 this.setState({ image: { uri: res.uri, base64: res.data } })
             }
@@ -51,21 +55,24 @@ class AddPhoto extends Component {
     }
 
     save = async () => {
-        if (!this.props.name) {
-            Alert.alert('Falha!', noUser)
-            return
-        }
 
-        this.props.onAddPost({
-            id: Math.random(),
-            nickname: this.props.name,
-            email: this.props.email,
-            image: this.state.image,
-            comments: [{
-                nickname: this.props.name,
-                comment: this.state.comment
-            }]
-        })
+        Alert.alert('Imagem Adicionada !!!', this.state.comment)
+
+        // if (!this.props.name) {
+        //     Alert.alert('Falha!', noUser)
+        //     return
+        // }
+
+        // this.props.onAddPost({
+        //     id: Math.random(),
+        //     nickname: this.props.name,
+        //     email: this.props.email,
+        //     image: this.state.image,
+        //     comments: [{
+        //         nickname: this.props.name,
+        //         comment: this.state.comment
+        //     }]
+        // })
     }
 
     render() {
@@ -73,21 +80,26 @@ class AddPhoto extends Component {
             <ScrollView>
                 <View style={styles.container}>
                     <Text style={styles.title}>Compartilhe uma imagem</Text>
+
                     <View style={styles.imageContainer}>
                         <Image source={this.state.image}
                             style={styles.image} />
                     </View>
+
                     <TouchableOpacity onPress={this.pickImage}
                         style={styles.buttom}>
                         <Text style={styles.buttomText}>Escolha a foto</Text>
                     </TouchableOpacity>
+
                     <TextInput placeholder='Algum comentário para a foto?'
                         style={styles.input} value={this.state.comment}
-                        editable={this.props.name != null}
+                        //editable={this.props.name != null}
                         onChangeText={comment => this.setState({ comment })} />
+
                     <TouchableOpacity onPress={this.save}
-                        disabled={this.props.loading}
-                        style={[styles.buttom, this.props.loading ? styles.buttonDisabled : null]}>
+                        // disabled={this.props.loading}
+                        // style={[styles.buttom, this.props.loading ? styles.buttonDisabled : null]}>
+                        style={styles.buttom}>
                         <Text style={styles.buttomText}>Salvar</Text>
                     </TouchableOpacity>
                 </View>
@@ -135,20 +147,20 @@ const styles = StyleSheet.create({
     }
 })
 
-// export default AddPhoto
+export default AddPhoto
 
-const mapStateToProps = ({ user, posts }) => {
-    return {
-        email: user.email,
-        name: user.name,
-        loading: posts.isUploading
-    }
-}
+// const mapStateToProps = ({ user, posts }) => {
+//     return {
+//         email: user.email,
+//         name: user.name,
+//         loading: posts.isUploading
+//     }
+// }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onAddPost: post => dispatch(addPost(post))
-    }
-}
+// const mapDispatchToProps = dispatch => {
+//     return {
+//         onAddPost: post => dispatch(addPost(post))
+//     }
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddPhoto)
+// export default connect(mapStateToProps, mapDispatchToProps)(AddPhoto)
