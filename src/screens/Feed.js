@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-// import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 import { StyleSheet, FlatList, View } from 'react-native'
 
 import Header from '../components/Header'
@@ -13,34 +13,13 @@ class Feed extends Component {
     //     this.props.onFetchPosts()
     // }
 
-    state = {
-       posts: [{
-           id: Math.random(),
-           nickname: "Rafael Pereira Filho",
-           email: "rafaelpf@gmail.com",
-           image: require('../../assets/imgs/fence.jpg'),
-           comments: [{
-               nickname: "Jonh Ray Sheldon",
-               comment: "Stuning!!"
-           }, {
-                nickname: "Ana Júlia Arruda",
-                comment: "Foto linda ! Onde foi tirada."
-           }]
-       }, {
-            id: Math.random(),
-            nickname: "Francisco Leandro Lima",
-            email: "franciscolm@gmail.com",
-            image: require('../../assets/imgs/bw.jpg'),
-            comments: []
-       }]
-    }
 
     render() {
         return (
             <View style={styles.container}>
                 <Header />
                 <FlatList
-                    data={this.state.posts}
+                    data={this.props.posts}
                     keyExtractor={item = () => `${item.id}`}
                     renderItem={({ item }) =>
                         <Post key={item.id} {...item} />} />
@@ -58,13 +37,13 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Feed
+//export default Feed
 
-// const mapStateToProps = ({ posts }) => {
-//     return {
-//         posts: posts.posts
-//     }
-// }
+const mapStateToProps = ({ posts }) => {
+    return {
+        posts: posts.posts
+    }
+}
 
 // const mapDispatchToProps = dispatch => {
 //     return {
@@ -72,5 +51,5 @@ export default Feed
 //     }
 // }
 
-// export default connect(mapStateToProps, mapDispatchToProps)(Feed)
+export default connect(mapStateToProps)(Feed)
 

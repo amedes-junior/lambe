@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-
-//import { connect } from 'react-redux'
-//import { addPost } from '../store/actions/posts'
+import { connect } from 'react-redux'
+import { addPost } from '../store/actions/posts'
 
 import {
     View,
@@ -13,7 +12,8 @@ import {
     Dimensions,
     Platform,
     ScrollView,
-    Alert
+    Alert,
+    TouchableNativeFeedback
 } from 'react-native'
 
 import ImagePicker from 'react-native-image-picker'
@@ -56,23 +56,26 @@ class AddPhoto extends Component {
 
     save = async () => {
 
-        Alert.alert('Imagem Adicionada !!!', this.state.comment)
+        // Alert.alert('Imagem Adicionada !!!', this.state.comment)
 
         // if (!this.props.name) {
         //     Alert.alert('Falha!', noUser)
         //     return
         // }
 
-        // this.props.onAddPost({
-        //     id: Math.random(),
-        //     nickname: this.props.name,
-        //     email: this.props.email,
-        //     image: this.state.image,
-        //     comments: [{
-        //         nickname: this.props.name,
-        //         comment: this.state.comment
-        //     }]
-        // })
+        this.props.onAddPost({
+            id: Math.random(),
+            nickname: this.props.name,
+            email: this.props.email,
+            image: this.state.image,
+            comments: [{
+                nickname: this.props.name,
+                comment: this.state.comment
+            }]
+        })
+
+        this.setState({image: null, comment: ''})
+        this.props.navigation.navigate('Feed')
     }
 
     render() {
@@ -147,20 +150,20 @@ const styles = StyleSheet.create({
     }
 })
 
-export default AddPhoto
+//export default AddPhoto
 
-// const mapStateToProps = ({ user, posts }) => {
-//     return {
-//         email: user.email,
-//         name: user.name,
-//         loading: posts.isUploading
-//     }
-// }
+const mapStateToProps = ({ user }) => {
+    return {
+        email: user.email,
+        name: user.name,
+        //loading: posts.isUploading
+    }
+}
 
-// const mapDispatchToProps = dispatch => {
-//     return {
-//         onAddPost: post => dispatch(addPost(post))
-//     }
-// }
+const mapDispatchToProps = dispatch => {
+    return {
+        onAddPost: post => dispatch(addPost(post))
+    }
+}
 
-// export default connect(mapStateToProps, mapDispatchToProps)(AddPhoto)
+export default connect(mapStateToProps, mapDispatchToProps)(AddPhoto)

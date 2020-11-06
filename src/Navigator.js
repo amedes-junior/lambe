@@ -32,10 +32,11 @@ const authRouter = createStackNavigator({
 const loginOrProfileRouter = createSwitchNavigator({
     Profile: Profile,
     Auth: authRouter
-    //Auth: Login
+
     }, {
-        initialRouteName: 'Profile'
-})
+        initialRouteName: 'Auth'
+    }
+)
 
 const MenuRoutes = {
     Feed: {
