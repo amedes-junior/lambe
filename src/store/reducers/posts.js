@@ -39,6 +39,23 @@ const reducer = (state = initialState, action) => {
                     ... action.payload
                 })
             }
+        case ADD_COMMENT:
+            return {
+                ...state,
+                posts: state.posts.map( post => {
+                    if (post.id == action.payload.postId){
+                        if (post.comments) {
+                            post.comments = post.comments.concat(
+                                    action.payload.comment
+                            )
+                        }
+                        else {
+                            post.comments = [action.payload.comment]
+                        }
+                    }
+                    return post
+                })
+            }
         // case SET_POSTS:
         //     return {
         //         ...state,

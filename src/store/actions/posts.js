@@ -9,6 +9,14 @@ import {
 // import { setMessage } from './message'
 // import axios from 'axios'
 
+export const addComment = payload => {
+    return {
+        type: ADD_COMMENT,
+        payload: payload
+    }
+}
+
+
 export const addPost = post => {
 
     return {
