@@ -7,11 +7,11 @@ import {name as appName} from './app.json';
 import Navigator from './src/Navigator'
 
 
-
 // import {name as appName} from './app.json'
-// import axios from 'axios'
-// axios.defaults.baseURL = 'https://lambe-bedee.firebaseio.com/'
-// https://lambe-936b2.firebaseio.com/
+
+import axios from 'axios'
+axios.defaults.baseURL = 'https://lambe-936b2.firebaseio.com/'
+
 
 const store = storeConfig()
 const Redux = () => (

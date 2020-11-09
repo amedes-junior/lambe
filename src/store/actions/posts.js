@@ -7,7 +7,7 @@ import {
 } from './actionTypes'
 
 // import { setMessage } from './message'
-// import axios from 'axios'
+import axios from 'axios'
 
 export const addComment = payload => {
     return {
@@ -19,10 +19,36 @@ export const addComment = payload => {
 
 export const addPost = post => {
 
-    return {
-        type: ADD_POST,
-        payload: post
-    }
+    // return {
+    //     type: ADD_POST,
+    //     payload: post
+    // }
+
+    //export const fetchPosts = () => {
+        return dispatch => {
+            axios.post('/posts.json', {... post})
+                .catch(err => { console.log(err)
+
+                    // dispatch(setMessage({
+                    //     title: 'Erro',
+                    //     text: 'Ocorreu um erro inesperado!'
+                    // }))
+                })
+                .then(res => { console.log(res.data)
+                    // const rawPosts = res.data
+                    // const posts = []
+                    // for (let key in rawPosts) {
+                    //     posts.push({
+                    //         ...rawPosts[key],
+                    //         id: key
+                    //     })
+                    // }
+
+                    // dispatch(setPosts(posts.reverse()))
+                })
+        }
+    //}
+
     // return (dispatch, getState) => {
     //     dispatch(creatingPost())
     //     axios({
@@ -90,29 +116,7 @@ export const addPost = post => {
 //     }
 // }
 
-// export const fetchPosts = () => {
-//     return dispatch => {
-//         axios.get('/posts.json')
-//             .catch(err => {
-//                 dispatch(setMessage({
-//                     title: 'Erro',
-//                     text: 'Ocorreu um erro inesperado!'
-//                 }))
-//             })
-//             .then(res => {
-//                 const rawPosts = res.data
-//                 const posts = []
-//                 for (let key in rawPosts) {
-//                     posts.push({
-//                         ...rawPosts[key],
-//                         id: key
-//                     })
-//                 }
 
-//                 dispatch(setPosts(posts.reverse()))
-//             })
-//     }
-// }
 
 // export const creatingPost = () => {
 //     return {
